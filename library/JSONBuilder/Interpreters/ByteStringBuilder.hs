@@ -16,6 +16,7 @@ import qualified Data.ByteString.Builder.Scientific as D
 
 -- |
 -- Produce a JSON ByteString Builder with compact syntax
+{-# INLINABLE compactJSON #-}
 compactJSON :: JSON -> Builder
 compactJSON =
   \case
@@ -26,18 +27,22 @@ compactJSON =
     JSON_Array x -> compactArray x
     JSON_Null -> null
 
+{-# INLINE null #-}
 null :: Builder
 null =
   A.primBounded A.null ()
 
+{-# INLINE boolean #-}
 boolean :: Bool -> Builder
 boolean =
   A.primBounded A.boolean
 
+{-# INLINE string #-}
 string :: Text -> Builder
 string x =
   char8 '"' <> B.encodeUtf8BuilderEscaped A.stringEncodedByte x <> char8 '"'
 
+{-# INLINE number #-}
 number :: Number -> Builder
 number =
   \case
@@ -45,6 +50,7 @@ number =
     Number_Double x -> doubleDec x
     Number_Scientific x -> scientific x
 
+{-# INLINE scientific #-}
 scientific :: Scientific -> Builder
 scientific n =
   if e < 0
@@ -54,10 +60,12 @@ scientific n =
     e =
       C.base10Exponent n
 
+{-# INLINE compactObject #-}
 compactObject :: Object -> Builder
 compactObject x =
   char8 '{' <> compactObjectBody x <> char8 '}'
 
+{-# INLINE compactObjectBody #-}
 compactObjectBody :: Object -> Builder
 compactObjectBody =
   \case
@@ -65,10 +73,12 @@ compactObjectBody =
     Object_Append left right -> compactObjectBody left <> char8 ',' <> compactObjectBody right
     Object_Empty -> mempty
 
+{-# INLINE compactArray #-}
 compactArray :: Array -> Builder
 compactArray x =
   char8 '[' <> compactArrayBody x <> char8 ']'
 
+{-# INLINE compactArrayBody #-}
 compactArrayBody :: Array -> Builder
 compactArrayBody =
   \case
