@@ -1,4 +1,4 @@
-module JSONBuilder.Interpreters.ByteStringBuilder.Prim
+module JSONBuilder.BoundedPrims
 where
 
 import JSONBuilder.Prelude

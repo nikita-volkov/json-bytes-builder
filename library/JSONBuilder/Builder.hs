@@ -17,56 +17,94 @@ module JSONBuilder.Builder
 where
 
 import JSONBuilder.Prelude hiding (null)
-import JSONBuilder.Model
+import qualified Data.ByteString.Builder as A
+import qualified JSONBuilder.Builders as E
 
+
+newtype JSON =
+  JSON A.Builder
+
+newtype Object =
+  Object (Maybe A.Builder)
+
+instance Monoid Object where
+  mempty =
+    Object Nothing
+  mappend =
+    \case
+      Object (Just left) ->
+        \case
+          Object (Just right) ->
+            Object (Just (left <> A.char8 ',' <> right))
+          _ ->
+            Object (Just left)
+      Object Nothing ->
+        id
+
+newtype Array =
+  Array (Maybe A.Builder)
+
+instance Monoid Array where
+  mempty =
+    Array Nothing
+  mappend =
+    \case
+      Array (Just left) ->
+        \case
+          Array (Just right) ->
+            Array (Just (left <> A.char8 ',' <> right))
+          _ ->
+            Array (Just left)
+      Array Nothing ->
+        id
 
 {-# INLINE null #-}
 null :: JSON
 null =
-  JSON_Null
+  JSON E.null
 
 {-# INLINE boolean #-}
 boolean :: Bool -> JSON
 boolean =
-  JSON_Boolean
+  JSON . E.boolean
 
 {-# INLINE number_int #-}
 number_int :: Int -> JSON
 number_int =
-  JSON_Number . Number_Int
+  JSON . A.intDec
 
 {-# INLINE number_double #-}
 number_double :: Double -> JSON
 number_double =
-  JSON_Number . Number_Double
+  JSON . A.doubleDec
 
 {-# INLINE number_scientific #-}
 number_scientific :: Scientific -> JSON
 number_scientific =
-  JSON_Number . Number_Scientific
+  JSON . E.scientific
 
 {-# INLINE string #-}
 string :: Text -> JSON
 string =
-  JSON_String
+  JSON . E.string
 
 {-# INLINE object #-}
 object :: Object -> JSON
-object =
-  JSON_Object
+object (Object x) =
+  JSON (E.inCurlies (fold x))
 
 {-# INLINE array #-}
 array :: Array -> JSON
-array =
-  JSON_Array
+array (Array x) =
+  JSON (E.inCurlies (fold x))
 
 {-# INLINE row #-}
 row :: Text -> JSON -> Object
-row =
-  Object_Row
+row key (JSON value) =
+  Object (Just (E.row key value))
 
 {-# INLINE element #-}
 element :: JSON -> Array
-element =
-  Array_Element
+element (JSON value) =
+  Array (Just value)
 

@@ -5,7 +5,7 @@ module JSONBuilder.Interpreters.ByteString
 where
 
 import JSONBuilder.Prelude hiding (length, null)
-import JSONBuilder.Model
+import JSONBuilder.Builder
 import qualified JSONBuilder.Interpreters.LazyByteString as A
 import qualified Data.ByteString.Lazy as B
 

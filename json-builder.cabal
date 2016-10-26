@@ -1,7 +1,7 @@
 name:
   json-builder
 version:
-  0.1
+  0.2
 synopsis:
   JSON builder
 category:
@@ -42,10 +42,10 @@ library
     Haskell2010
   other-modules:
     JSONBuilder.Prelude
-    JSONBuilder.Interpreters.ByteStringBuilder.Prim
+    JSONBuilder.BoundedPrims
+    JSONBuilder.Builders
   exposed-modules:
     JSONBuilder.Builder
-    JSONBuilder.Model
     JSONBuilder.Interpreters.ByteStringBuilder
     JSONBuilder.Interpreters.ByteString
     JSONBuilder.Interpreters.LazyByteString
