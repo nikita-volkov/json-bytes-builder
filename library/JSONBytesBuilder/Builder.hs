@@ -95,12 +95,12 @@ string =
 {-# INLINE object #-}
 object :: Object -> JSON
 object (Object x) =
-  JSON (inline E.inCurlies (fold x))
+  JSON (maybe E.emptyObject (inline E.inCurlies) x)
 
 {-# INLINE array #-}
 array :: Array -> JSON
 array (Array x) =
-  JSON (inline E.inCurlies (fold x))
+  JSON (maybe E.emptyArray (inline E.inCurlies) x)
 
 {-# INLINE row #-}
 row :: Text -> JSON -> Object

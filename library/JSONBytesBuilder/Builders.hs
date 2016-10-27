@@ -54,3 +54,13 @@ inSquarlies x =
 commaSeparated :: Builder -> Builder -> Builder
 commaSeparated left right =
   left <> char8 ',' <> right
+
+{-# INLINABLE emptyObject #-}
+emptyObject :: Builder
+emptyObject =
+  A.primBounded A.emptyObject ()
+
+{-# INLINABLE emptyArray #-}
+emptyArray :: Builder
+emptyArray =
+  A.primBounded A.emptyArray ()
