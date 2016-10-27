@@ -135,7 +135,7 @@ object (Object x) =
 {-# INLINE array #-}
 array :: Array -> JSON
 array (Array x) =
-  JSON (maybe E.emptyArray (inline E.inCurlies) x)
+  JSON (maybe E.emptyArray (inline E.inSquarelies) x)
 
 -- |
 -- Object builder from a key-value pair,

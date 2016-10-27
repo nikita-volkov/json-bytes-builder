@@ -45,9 +45,9 @@ row :: Text -> Builder -> Builder
 row key value =
   string key <> char8 ':' <> value
 
-{-# INLINABLE inSquarlies #-}
-inSquarlies :: Builder -> Builder
-inSquarlies x =
+{-# INLINABLE inSquarelies #-}
+inSquarelies :: Builder -> Builder
+inSquarelies x =
   char8 '[' <> x <> char8 ']'
 
 {-# INLINABLE commaSeparated #-}
