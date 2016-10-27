@@ -19,7 +19,7 @@ where
 
 import JSONBytesBuilder.Prelude hiding (null)
 import qualified Data.ByteString.Builder as A
-import qualified JSONBytesBuilder.Builders as E
+import qualified JSONBytesBuilder.ByteString.Builders as E
 
 
 newtype JSON =

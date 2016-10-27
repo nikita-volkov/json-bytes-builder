@@ -1,9 +1,9 @@
-module JSONBytesBuilder.Builders
+module JSONBytesBuilder.ByteString.Builders
 where
 
 import JSONBytesBuilder.Prelude hiding (length, null)
 import Data.ByteString.Builder
-import qualified JSONBytesBuilder.BoundedPrims as A
+import qualified JSONBytesBuilder.ByteString.BoundedPrims as A
 import qualified Data.ByteString.Builder.Prim as A
 import qualified Data.Text.Encoding as B
 import qualified Data.Scientific as C

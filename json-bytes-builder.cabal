@@ -45,8 +45,8 @@ library
     Haskell2010
   other-modules:
     JSONBytesBuilder.Prelude
-    JSONBytesBuilder.BoundedPrims
-    JSONBytesBuilder.Builders
+    JSONBytesBuilder.ByteString.BoundedPrims
+    JSONBytesBuilder.ByteString.Builders
   exposed-modules:
     JSONBytesBuilder.Builder
     JSONBytesBuilder.Interpreters.ByteStringBuilder
