@@ -12,6 +12,6 @@ import Data.ByteString.Builder
 -- |
 -- Produce a JSON ByteString builder with compact syntax
 {-# INLINE compactJSON #-}
-compactJSON :: JSON -> Builder
+compactJSON :: Literal -> Builder
 compactJSON =
   unsafeCoerce

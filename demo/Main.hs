@@ -29,7 +29,7 @@ data Genre =
 -- * Builders
 -------------------------
 
-artist :: Artist -> A.JSON
+artist :: Artist -> A.Literal
 artist (Artist name genres) =
   A.object rows
   where
@@ -40,13 +40,13 @@ artist (Artist name genres) =
         genresElements =
           foldMap (A.element . genre) genres
 
-genre :: Genre -> A.JSON
+genre :: Genre -> A.Literal
 genre (Genre name) =
   A.object rows
   where
     rows =
       A.row "name" (A.string name)
 
-metallica :: A.JSON
+metallica :: A.Literal
 metallica =
   artist (Artist "Metallica" [Genre "Metal", Genre "Rock", Genre "Blues"])

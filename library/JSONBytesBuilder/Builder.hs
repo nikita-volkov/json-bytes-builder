@@ -2,8 +2,8 @@
 -- DSL for construction of JSON.
 module JSONBytesBuilder.Builder
 (
-  -- ** JSON builders
-  JSON,
+  -- ** Literal builders
+  Literal,
   null,
   boolean,
   number_int,
@@ -28,12 +28,12 @@ import qualified JSONBytesBuilder.ByteString.Builders as E
 
 
 -- |
--- Builder of any JSON value.
-newtype JSON =
-  JSON A.Builder
+-- Builder of any JSON literal.
+newtype Literal =
+  Literal A.Builder
 
 -- |
--- Builder of a JSON Object value.
+-- Builder of a JSON Object literal.
 newtype Object =
   Object (Maybe A.Builder)
 
@@ -54,7 +54,7 @@ instance Monoid Object where
         id
 
 -- |
--- Builder of a JSON Array value.
+-- Builder of a JSON Array literal.
 newtype Array =
   Array (Maybe A.Builder)
 
@@ -77,65 +77,65 @@ instance Monoid Array where
 -- |
 -- JSON Null literal.
 {-# INLINE null #-}
-null :: JSON
+null :: Literal
 null =
-  JSON (inline E.null)
+  Literal (inline E.null)
 
 -- |
 -- JSON Boolean literal from 'Bool'.
 {-# INLINE boolean #-}
-boolean :: Bool -> JSON
+boolean :: Bool -> Literal
 boolean =
-  JSON . inline E.boolean
+  Literal . inline E.boolean
 
 -- |
 -- JSON Number literal from 'Int'.
 {-# INLINE number_int #-}
-number_int :: Int -> JSON
+number_int :: Int -> Literal
 number_int =
-  JSON . inline A.intDec
+  Literal . inline A.intDec
 
 -- |
 -- JSON Number literal from 'Integer'.
 {-# INLINE number_integer #-}
-number_integer :: Integer -> JSON
+number_integer :: Integer -> Literal
 number_integer =
-  JSON . inline A.integerDec
+  Literal . inline A.integerDec
 
 -- |
 -- JSON Number literal from 'Double'.
 {-# INLINE number_double #-}
-number_double :: Double -> JSON
+number_double :: Double -> Literal
 number_double =
-  JSON . inline A.doubleDec
+  Literal . inline A.doubleDec
 
 -- |
 -- JSON Number literal from 'Scientific'.
 {-# INLINE number_scientific #-}
-number_scientific :: Scientific -> JSON
+number_scientific :: Scientific -> Literal
 number_scientific =
-  JSON . inline E.scientific
+  Literal . inline E.scientific
 
 -- |
 -- JSON String literal from 'Text'.
 {-# INLINE string #-}
-string :: Text -> JSON
+string :: Text -> Literal
 string =
-  JSON . inline E.string
+  Literal . inline E.string
 
 -- |
 -- JSON Object literal from the 'Object' builder.
 {-# INLINE object #-}
-object :: Object -> JSON
+object :: Object -> Literal
 object (Object x) =
-  JSON (maybe E.emptyObject (inline E.inCurlies) x)
+  Literal (maybe E.emptyObject (inline E.inCurlies) x)
 
 -- |
 -- JSON Array literal from the 'Array' builder.
 {-# INLINE array #-}
-array :: Array -> JSON
+array :: Array -> Literal
 array (Array x) =
-  JSON (maybe E.emptyArray (inline E.inSquarelies) x)
+  Literal (maybe E.emptyArray (inline E.inSquarelies) x)
 
 -- |
 -- Object builder from a key-value pair,
@@ -144,9 +144,9 @@ array (Array x) =
 -- Use the 'Object' 'Monoid' instance
 -- to construct multi-row objects.
 {-# INLINE row #-}
-row :: Text -> JSON -> Object
-row key (JSON value) =
-  Object (Just (inline E.row key value))
+row :: Text -> Literal -> Object
+row key (Literal literal) =
+  Object (Just (inline E.row key literal))
 
 -- |
 -- Array builder from an element,
@@ -155,7 +155,7 @@ row key (JSON value) =
 -- Use the 'Array' 'Monoid' instance
 -- to construct multi-element arrays.
 {-# INLINE element #-}
-element :: JSON -> Array
-element (JSON value) =
-  Array (Just value)
+element :: Literal -> Array
+element (Literal literal) =
+  Array (Just literal)
 

@@ -13,6 +13,6 @@ import qualified Data.ByteString.Lazy as B
 -- |
 -- Produce a strict JSON ByteString with compact syntax
 {-# INLINE compactJSON #-}
-compactJSON :: JSON -> ByteString
+compactJSON :: Literal -> ByteString
 compactJSON =
   B.toStrict . A.compactJSON
