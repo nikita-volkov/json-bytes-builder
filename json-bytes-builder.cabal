@@ -58,5 +58,5 @@ library
     bytestring == 0.10.*,
     semigroups >= 0.16 && < 0.20,
     base-prelude < 2,
-    base >= 4.6 && < 5
+    base >= 4.7 && < 5
 
