@@ -37,7 +37,7 @@ instance Monoid Object where
       Object (Just left) ->
         \case
           Object (Just right) ->
-            Object (Just (left <> A.char7 ',' <> right))
+            Object (Just (left <> A.char8 ',' <> right))
           _ ->
             Object (Just left)
       Object Nothing ->
@@ -56,7 +56,7 @@ instance Monoid Array where
       Array (Just left) ->
         \case
           Array (Just right) ->
-            Array (Just (left <> A.char7 ',' <> right))
+            Array (Just (left <> A.char8 ',' <> right))
           _ ->
             Array (Just left)
       Array Nothing ->

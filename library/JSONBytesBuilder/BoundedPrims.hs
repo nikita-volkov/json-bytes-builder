@@ -45,28 +45,28 @@ hexEncodedByte =
 ascii2 :: (Char, Char) -> BoundedPrim a
 ascii2 cs =
   liftFixedToBounded $
-  const cs >$< char7 >*< char7
+  const cs >$< char8 >*< char8
 
 {-# INLINE ascii4 #-}
 ascii4 :: (Char, (Char, (Char, Char))) -> BoundedPrim a
 ascii4 cs =
   liftFixedToBounded $
-  const cs >$< char7 >*< char7 >*< char7 >*< char7
+  const cs >$< char8 >*< char8 >*< char8 >*< char8
 
 {-# INLINE ascii5 #-}
 ascii5 :: (Char, (Char, (Char, (Char, Char)))) -> BoundedPrim a
 ascii5 cs =
   liftFixedToBounded $
-  const cs >$< char7 >*< char7 >*< char7 >*< char7 >*< char7
+  const cs >$< char8 >*< char8 >*< char8 >*< char8 >*< char8
 
 {-# INLINE ascii6 #-}
 ascii6 :: (Char, (Char, (Char, (Char, (Char, Char))))) -> BoundedPrim a
 ascii6 cs =
   liftFixedToBounded $ 
-  const cs >$< char7 >*< char7 >*< char7 >*< char7 >*< char7 >*< char7
+  const cs >$< char8 >*< char8 >*< char8 >*< char8 >*< char8 >*< char8
 
 {-# INLINE ascii8 #-}
 ascii8 :: (Char, (Char, (Char, (Char, (Char, (Char, (Char, Char))))))) -> BoundedPrim a
 ascii8 cs =
   liftFixedToBounded $
-  const cs >$< char7 >*< char7 >*< char7 >*< char7 >*< char7 >*< char7 >*< char7 >*< char7
+  const cs >$< char8 >*< char8 >*< char8 >*< char8 >*< char8 >*< char8 >*< char8 >*< char8

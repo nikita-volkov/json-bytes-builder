@@ -23,7 +23,7 @@ boolean =
 {-# INLINABLE string #-}
 string :: Text -> Builder
 string x =
-  char7 '"' <> B.encodeUtf8BuilderEscaped A.stringEncodedByte x <> char7 '"'
+  char8 '"' <> B.encodeUtf8BuilderEscaped A.stringEncodedByte x <> char8 '"'
 
 {-# INLINABLE scientific #-}
 scientific :: Scientific -> Builder
@@ -38,19 +38,19 @@ scientific n =
 {-# INLINABLE inCurlies #-}
 inCurlies :: Builder -> Builder
 inCurlies x =
-  char7 '{' <> x <> char7 '}'
+  char8 '{' <> x <> char8 '}'
 
 {-# INLINABLE row #-}
 row :: Text -> Builder -> Builder
 row key value =
-  string key <> char7 ':' <> value
+  string key <> char8 ':' <> value
 
 {-# INLINABLE inSquarlies #-}
 inSquarlies :: Builder -> Builder
 inSquarlies x =
-  char7 '[' <> x <> char7 ']'
+  char8 '[' <> x <> char8 ']'
 
 {-# INLINABLE commaSeparated #-}
 commaSeparated :: Builder -> Builder -> Builder
 commaSeparated left right =
-  left <> char7 ',' <> right
+  left <> char8 ',' <> right
