@@ -65,47 +65,47 @@ instance Monoid Array where
 {-# INLINE null #-}
 null :: JSON
 null =
-  JSON E.null
+  JSON (inline E.null)
 
 {-# INLINE boolean #-}
 boolean :: Bool -> JSON
 boolean =
-  JSON . E.boolean
+  JSON . inline E.boolean
 
 {-# INLINE number_int #-}
 number_int :: Int -> JSON
 number_int =
-  JSON . A.intDec
+  JSON . inline A.intDec
 
 {-# INLINE number_double #-}
 number_double :: Double -> JSON
 number_double =
-  JSON . A.doubleDec
+  JSON . inline A.doubleDec
 
 {-# INLINE number_scientific #-}
 number_scientific :: Scientific -> JSON
 number_scientific =
-  JSON . E.scientific
+  JSON . inline E.scientific
 
 {-# INLINE string #-}
 string :: Text -> JSON
 string =
-  JSON . E.string
+  JSON . inline E.string
 
 {-# INLINE object #-}
 object :: Object -> JSON
 object (Object x) =
-  JSON (E.inCurlies (fold x))
+  JSON (inline E.inCurlies (fold x))
 
 {-# INLINE array #-}
 array :: Array -> JSON
 array (Array x) =
-  JSON (E.inCurlies (fold x))
+  JSON (inline E.inCurlies (fold x))
 
 {-# INLINE row #-}
 row :: Text -> JSON -> Object
 row key (JSON value) =
-  Object (Just (E.row key value))
+  Object (Just (inline E.row key value))
 
 {-# INLINE element #-}
 element :: JSON -> Array
