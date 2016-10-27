@@ -28,8 +28,10 @@ newtype Object =
   Object (Maybe A.Builder)
 
 instance Monoid Object where
+  {-# INLINE mempty #-}
   mempty =
     Object Nothing
+  {-# INLINE mappend #-}
   mappend =
     \case
       Object (Just left) ->
@@ -45,8 +47,10 @@ newtype Array =
   Array (Maybe A.Builder)
 
 instance Monoid Array where
+  {-# INLINE mempty #-}
   mempty =
     Array Nothing
+  {-# INLINE mappend #-}
   mappend =
     \case
       Array (Just left) ->

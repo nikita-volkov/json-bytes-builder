@@ -10,22 +10,22 @@ import qualified Data.Scientific as C
 import qualified Data.ByteString.Builder.Scientific as D
 
 
-{-# INLINE null #-}
+{-# INLINABLE null #-}
 null :: Builder
 null =
   A.primBounded A.null ()
 
-{-# INLINE boolean #-}
+{-# INLINABLE boolean #-}
 boolean :: Bool -> Builder
 boolean =
   A.primBounded A.boolean
 
-{-# INLINE string #-}
+{-# INLINABLE string #-}
 string :: Text -> Builder
 string x =
   char8 '"' <> B.encodeUtf8BuilderEscaped A.stringEncodedByte x <> char8 '"'
 
-{-# INLINE scientific #-}
+{-# INLINABLE scientific #-}
 scientific :: Scientific -> Builder
 scientific n =
   if e < 0
@@ -35,17 +35,17 @@ scientific n =
     e =
       C.base10Exponent n
 
-{-# INLINE inCurlies #-}
+{-# INLINABLE inCurlies #-}
 inCurlies :: Builder -> Builder
 inCurlies x =
   char8 '{' <> x <> char8 '}'
 
-{-# INLINE row #-}
+{-# INLINABLE row #-}
 row :: Text -> Builder -> Builder
 row key value =
   string key <> char8 ':' <> value
 
-{-# INLINE inSquarlies #-}
+{-# INLINABLE inSquarlies #-}
 inSquarlies :: Builder -> Builder
 inSquarlies x =
   char8 '[' <> x <> char8 ']'
