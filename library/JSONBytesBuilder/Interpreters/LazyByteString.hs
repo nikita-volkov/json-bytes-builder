@@ -1,6 +1,6 @@
 module JSONBytesBuilder.Interpreters.LazyByteString
 (
-  compactJSON,
+  jsonLiteral,
 )
 where
 
@@ -12,8 +12,8 @@ import qualified Data.ByteString.Lazy as B
 
 
 -- |
--- Produce a lazy JSON ByteString with compact syntax
-{-# INLINE compactJSON #-}
-compactJSON :: Literal -> B.ByteString
-compactJSON =
-  toLazyByteString . A.compactJSON
+-- Produce a lazy JSON ByteString with compact syntax from a literal builder.
+{-# INLINE jsonLiteral #-}
+jsonLiteral :: Literal -> B.ByteString
+jsonLiteral =
+  toLazyByteString . A.jsonLiteral

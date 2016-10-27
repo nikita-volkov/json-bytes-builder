@@ -13,7 +13,7 @@ import qualified Data.ByteString.Char8 as C
 -- 
 -- >{"name":"Metallica","genres":[{"name":"Metal"},{"name":"Rock"},{"name":"Blues"}]}
 main =
-  C.putStrLn (B.compactJSON metallica)
+  C.putStrLn (B.jsonLiteral metallica)
 
 
 -- * Model
