@@ -16,8 +16,8 @@ module JSONBytesBuilder.Builder
   -- ** Rows builders
   Rows,
   row,
-  -- ** Array builders
-  Array,
+  -- ** Elements builders
+  Elements,
   element,
 )
 where
@@ -54,24 +54,24 @@ instance Monoid Rows where
         id
 
 -- |
--- Builder of a JSON Array literal.
-newtype Array =
-  Array (Maybe A.Builder)
+-- Builder of JSON Array elements.
+newtype Elements =
+  Elements (Maybe A.Builder)
 
-instance Monoid Array where
+instance Monoid Elements where
   {-# INLINE mempty #-}
   mempty =
-    Array Nothing
+    Elements Nothing
   {-# INLINE mappend #-}
   mappend =
     \case
-      Array (Just left) ->
+      Elements (Just left) ->
         \case
-          Array (Just right) ->
-            Array (Just (left <> A.char8 ',' <> right))
+          Elements (Just right) ->
+            Elements (Just (left <> A.char8 ',' <> right))
           _ ->
-            Array (Just left)
-      Array Nothing ->
+            Elements (Just left)
+      Elements Nothing ->
         id
 
 -- |
@@ -131,10 +131,10 @@ object (Rows x) =
   Literal (maybe E.emptyObject (inline E.inCurlies) x)
 
 -- |
--- JSON Array literal from the 'Array' builder.
+-- JSON Array literal from the 'Elements' builder.
 {-# INLINE array #-}
-array :: Array -> Literal
-array (Array x) =
+array :: Elements -> Literal
+array (Elements x) =
   Literal (maybe E.emptyArray (inline E.inSquarelies) x)
 
 -- |
@@ -149,13 +149,13 @@ row key (Literal literal) =
   Rows (Just (inline E.row key literal))
 
 -- |
--- Array builder from an element,
+-- Elements builder from an element,
 -- which is an already encoded JSON literal.
 -- 
--- Use the 'Array' 'Monoid' instance
+-- Use the 'Elements' 'Monoid' instance
 -- to construct multi-element arrays.
 {-# INLINE element #-}
-element :: Literal -> Array
+element :: Literal -> Elements
 element (Literal literal) =
-  Array (Just literal)
+  Elements (Just literal)
 
