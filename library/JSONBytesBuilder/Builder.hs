@@ -1,4 +1,4 @@
-module JSONBuilder.Builder
+module JSONBytesBuilder.Builder
 (
   JSON,
   null,
@@ -16,9 +16,9 @@ module JSONBuilder.Builder
 )
 where
 
-import JSONBuilder.Prelude hiding (null)
+import JSONBytesBuilder.Prelude hiding (null)
 import qualified Data.ByteString.Builder as A
-import qualified JSONBuilder.Builders as E
+import qualified JSONBytesBuilder.Builders as E
 
 
 newtype JSON =

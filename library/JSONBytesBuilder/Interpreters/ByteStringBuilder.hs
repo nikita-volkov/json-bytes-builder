@@ -1,11 +1,11 @@
-module JSONBuilder.Interpreters.ByteStringBuilder
+module JSONBytesBuilder.Interpreters.ByteStringBuilder
 (
   compactJSON,
 )
 where
 
-import JSONBuilder.Prelude hiding (length, null)
-import JSONBuilder.Builder
+import JSONBytesBuilder.Prelude hiding (length, null)
+import JSONBytesBuilder.Builder
 import Data.ByteString.Builder
 
 

@@ -1,5 +1,5 @@
 name:
-  json-builder
+  json-bytes-builder
 version:
   0.2
 synopsis:
@@ -7,9 +7,9 @@ synopsis:
 category:
   JSON
 homepage:
-  https://github.com/nikita-volkov/json-builder
+  https://github.com/nikita-volkov/json-bytes-builder
 bug-reports:
-  https://github.com/nikita-volkov/json-builder/issues 
+  https://github.com/nikita-volkov/json-bytes-builder/issues 
 author:
   Nikita Volkov <nikita.y.volkov@mail.ru>
 maintainer:
@@ -30,7 +30,7 @@ source-repository head
   type:
     git
   location:
-    git://github.com/nikita-volkov/json-builder.git
+    git://github.com/nikita-volkov/json-bytes-builder.git
 
 
 library
@@ -41,14 +41,14 @@ library
   default-language:
     Haskell2010
   other-modules:
-    JSONBuilder.Prelude
-    JSONBuilder.BoundedPrims
-    JSONBuilder.Builders
+    JSONBytesBuilder.Prelude
+    JSONBytesBuilder.BoundedPrims
+    JSONBytesBuilder.Builders
   exposed-modules:
-    JSONBuilder.Builder
-    JSONBuilder.Interpreters.ByteStringBuilder
-    JSONBuilder.Interpreters.ByteString
-    JSONBuilder.Interpreters.LazyByteString
+    JSONBytesBuilder.Builder
+    JSONBytesBuilder.Interpreters.ByteStringBuilder
+    JSONBytesBuilder.Interpreters.ByteString
+    JSONBytesBuilder.Interpreters.LazyByteString
   build-depends:
     scientific == 0.3.*,
     text == 1.*,
