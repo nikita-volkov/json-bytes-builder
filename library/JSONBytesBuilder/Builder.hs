@@ -13,8 +13,8 @@ module JSONBytesBuilder.Builder
   string,
   object,
   array,
-  -- ** Object builders
-  Object,
+  -- ** Rows builders
+  Rows,
   row,
   -- ** Array builders
   Array,
@@ -33,24 +33,24 @@ newtype Literal =
   Literal A.Builder
 
 -- |
--- Builder of a JSON Object literal.
-newtype Object =
-  Object (Maybe A.Builder)
+-- Builder of JSON Object rows.
+newtype Rows =
+  Rows (Maybe A.Builder)
 
-instance Monoid Object where
+instance Monoid Rows where
   {-# INLINE mempty #-}
   mempty =
-    Object Nothing
+    Rows Nothing
   {-# INLINE mappend #-}
   mappend =
     \case
-      Object (Just left) ->
+      Rows (Just left) ->
         \case
-          Object (Just right) ->
-            Object (Just (left <> A.char8 ',' <> right))
+          Rows (Just right) ->
+            Rows (Just (left <> A.char8 ',' <> right))
           _ ->
-            Object (Just left)
-      Object Nothing ->
+            Rows (Just left)
+      Rows Nothing ->
         id
 
 -- |
@@ -124,10 +124,10 @@ string =
   Literal . inline E.string
 
 -- |
--- JSON Object literal from the 'Object' builder.
+-- JSON Object literal from the 'Rows' builder.
 {-# INLINE object #-}
-object :: Object -> Literal
-object (Object x) =
+object :: Rows -> Literal
+object (Rows x) =
   Literal (maybe E.emptyObject (inline E.inCurlies) x)
 
 -- |
@@ -138,15 +138,15 @@ array (Array x) =
   Literal (maybe E.emptyArray (inline E.inSquarelies) x)
 
 -- |
--- Object builder from a key-value pair,
+-- Rows builder from a key-value pair,
 -- where value is an already encoded JSON literal.
 -- 
--- Use the 'Object' 'Monoid' instance
+-- Use the 'Rows' 'Monoid' instance
 -- to construct multi-row objects.
 {-# INLINE row #-}
-row :: Text -> Literal -> Object
+row :: Text -> Literal -> Rows
 row key (Literal literal) =
-  Object (Just (inline E.row key literal))
+  Rows (Just (inline E.row key literal))
 
 -- |
 -- Array builder from an element,
