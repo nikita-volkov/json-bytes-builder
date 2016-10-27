@@ -1,7 +1,7 @@
 name:
   json-bytes-builder
 version:
-  0.2.1.2
+  0.3
 synopsis:
   Direct-to-bytes JSON Builder
 description:
@@ -9,7 +9,7 @@ description:
   which is faster and simpler than \"aeson\".
   .
   Check out
-  <http://hackage.haskell.org/package/json-bytes-builder-0.2.1.2/src/demo/Main.hs the demo>.
+  <http://hackage.haskell.org/package/json-bytes-builder-0.3/src/demo/Main.hs the demo>.
 category:
   JSON, Codecs
 homepage:
