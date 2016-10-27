@@ -3,9 +3,12 @@ name:
 version:
   0.2
 synopsis:
-  JSON builder
+  Direct-to-bytes JSON Builder
+description:
+  An API for encoding of arbitrary data-structures into JSON byte-arrays,
+  which is faster than \"aeson\".
 category:
-  JSON
+  JSON, Codecs
 homepage:
   https://github.com/nikita-volkov/json-bytes-builder
 bug-reports:
