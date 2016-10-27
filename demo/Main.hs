@@ -1,0 +1,52 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+
+import BasePrelude
+import Data.ByteString (ByteString)
+import Data.Text (Text)
+import qualified JSONBytesBuilder.Builder as A
+import qualified JSONBytesBuilder.Interpreters.ByteString as B
+import qualified Data.ByteString.Char8 as C
+
+
+-- |
+-- Outputs the following:
+-- 
+-- >{"name":"Metallica","genres":[{"name":"Metal"},{"name":"Rock"},{"name":"Blues"}]}
+main =
+  C.putStrLn (B.compactJSON metallica)
+
+
+-- * Model
+-------------------------
+
+data Artist =
+  Artist { artist_name :: Text, artist_genres :: [Genre] }
+
+data Genre =
+  Genre { genre_name :: Text }
+
+
+-- * Builders
+-------------------------
+
+artist :: Artist -> A.JSON
+artist (Artist name genres) =
+  A.object rows
+  where
+    rows =
+      A.row "name" (A.string name) <>
+      A.row "genres" (A.array genresElements)
+      where
+        genresElements =
+          foldMap (A.element . genre) genres
+
+genre :: Genre -> A.JSON
+genre (Genre name) =
+  A.object rows
+  where
+    rows =
+      A.row "name" (A.string name)
+
+metallica :: A.JSON
+metallica =
+  artist (Artist "Metallica" [Genre "Metal", Genre "Rock", Genre "Blues"])
