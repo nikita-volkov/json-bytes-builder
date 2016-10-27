@@ -4,6 +4,7 @@ module JSONBytesBuilder.Builder
   null,
   boolean,
   number_int,
+  number_integer,
   number_double,
   number_scientific,
   string,
@@ -76,6 +77,11 @@ boolean =
 number_int :: Int -> JSON
 number_int =
   JSON . inline A.intDec
+
+{-# INLINE number_integer #-}
+number_integer :: Integer -> JSON
+number_integer =
+  JSON . inline A.integerDec
 
 {-# INLINE number_double #-}
 number_double :: Double -> JSON
