@@ -15,6 +15,16 @@ boolean :: BoundedPrim Bool
 boolean =
   condB id (ascii4 ('t', ('r', ('u', 'e')))) (ascii5 ('f', ('a', ('l', ('s', 'e')))))
 
+{-# INLINE emptyArray #-}
+emptyArray :: BoundedPrim ()
+emptyArray =
+  ascii2 ('[', ']')
+
+{-# INLINE emptyObject #-}
+emptyObject :: BoundedPrim ()
+emptyObject =
+  ascii2 ('{', '}')
+
 {-# INLINE stringEncodedByte #-}
 stringEncodedByte :: BoundedPrim Word8
 stringEncodedByte =
