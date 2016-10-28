@@ -1,7 +1,7 @@
 name:
   json-bytes-builder
 version:
-  0.3
+  0.4
 synopsis:
   Direct-to-bytes JSON Builder
 description:
@@ -47,14 +47,15 @@ library
   default-language:
     Haskell2010
   other-modules:
-    JSONBytesBuilder.Prelude
-    JSONBytesBuilder.ByteString.BoundedPrims
-    JSONBytesBuilder.ByteString.Builders
+    JSONBytesBuilder.Private.Prelude
+    JSONBytesBuilder.Private.ByteString.BoundedPrim
+    JSONBytesBuilder.Private.ByteString.Builder
+    JSONBytesBuilder.Private.Builder
   exposed-modules:
     JSONBytesBuilder.Builder
-    JSONBytesBuilder.Interpreters.ByteStringBuilder
-    JSONBytesBuilder.Interpreters.ByteString
-    JSONBytesBuilder.Interpreters.LazyByteString
+    JSONBytesBuilder.ByteString.Builder
+    JSONBytesBuilder.ByteString.ByteString
+    JSONBytesBuilder.ByteString.LazyByteString
   build-depends:
     scientific == 0.3.*,
     text == 1.*,

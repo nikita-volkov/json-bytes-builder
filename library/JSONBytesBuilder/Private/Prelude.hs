@@ -1,4 +1,4 @@
-module JSONBytesBuilder.Prelude
+module JSONBytesBuilder.Private.Prelude
 (
   module Exports,
 )

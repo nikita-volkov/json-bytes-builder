@@ -1,7 +1,7 @@
-module JSONBytesBuilder.ByteString.BoundedPrims
+module JSONBytesBuilder.Private.ByteString.BoundedPrim
 where
 
-import JSONBytesBuilder.Prelude
+import JSONBytesBuilder.Private.Prelude
 import Data.ByteString.Builder.Prim
 
 

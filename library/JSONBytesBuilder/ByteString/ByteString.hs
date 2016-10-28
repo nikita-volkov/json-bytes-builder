@@ -1,12 +1,12 @@
-module JSONBytesBuilder.Interpreters.ByteString
+module JSONBytesBuilder.ByteString.ByteString
 (
   jsonLiteral,
 )
 where
 
-import JSONBytesBuilder.Prelude hiding (length, null)
+import JSONBytesBuilder.Private.Prelude hiding (length, null)
 import JSONBytesBuilder.Builder
-import qualified JSONBytesBuilder.Interpreters.LazyByteString as A
+import qualified JSONBytesBuilder.ByteString.LazyByteString as A
 import qualified Data.ByteString.Lazy as B
 
 

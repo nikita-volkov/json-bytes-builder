@@ -4,7 +4,7 @@ import BasePrelude
 import Data.ByteString (ByteString)
 import Data.Text (Text)
 import qualified JSONBytesBuilder.Builder as A
-import qualified JSONBytesBuilder.Interpreters.ByteString as B
+import qualified JSONBytesBuilder.ByteString.ByteString as B
 import qualified Data.ByteString.Char8 as C
 
 
