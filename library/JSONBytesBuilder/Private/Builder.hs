@@ -97,10 +97,15 @@ number_scientific =
 
 -- |
 -- JSON String literal from 'Text'.
-{-# INLINE string #-}
-string :: Text -> Literal
-string =
+{-# INLINE string_text #-}
+string_text :: Text -> Literal
+string_text =
   Literal . inline E.string
+
+{-# INLINE string_bytes #-}
+string_bytes :: ByteString -> Literal
+string_bytes =
+  Literal . inline E.asciiString
 
 -- |
 -- JSON Object literal from the 'Rows' builder.

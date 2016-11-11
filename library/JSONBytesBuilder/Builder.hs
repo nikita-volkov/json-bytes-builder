@@ -10,7 +10,8 @@ module JSONBytesBuilder.Builder
   number_integer,
   number_double,
   number_scientific,
-  string,
+  string_text,
+  string_bytes,
   object,
   array,
   -- ** Rows builders

@@ -5,9 +5,10 @@ import JSONBytesBuilder.Private.Prelude hiding (length, null)
 import Data.ByteString.Builder
 import qualified JSONBytesBuilder.Private.ByteString.BoundedPrim as A
 import qualified Data.ByteString.Builder.Prim as A
+import qualified Data.ByteString.Builder.Scientific as D
+import qualified Data.ByteString as E
 import qualified Data.Text.Encoding as B
 import qualified Data.Scientific as C
-import qualified Data.ByteString.Builder.Scientific as D
 
 
 {-# INLINABLE null #-}
@@ -24,6 +25,11 @@ boolean =
 string :: Text -> Builder
 string x =
   char8 '"' <> B.encodeUtf8BuilderEscaped A.stringEncodedByte x <> char8 '"'
+
+{-# INLINABLE asciiString #-}
+asciiString :: ByteString -> Builder
+asciiString x =
+  char8 '"' <> A.primMapByteStringBounded A.stringEncodedByte x <> char8 '"'
 
 {-# INLINABLE scientific #-}
 scientific :: Scientific -> Builder

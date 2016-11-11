@@ -34,7 +34,7 @@ artist (Artist name genres) =
   A.object rows
   where
     rows =
-      A.row "name" (A.string name) <>
+      A.row "name" (A.string_text name) <>
       A.row "genres" (A.array genresElements)
       where
         genresElements =
@@ -45,7 +45,7 @@ genre (Genre name) =
   A.object rows
   where
     rows =
-      A.row "name" (A.string name)
+      A.row "name" (A.string_text name)
 
 metallica :: A.Literal
 metallica =
