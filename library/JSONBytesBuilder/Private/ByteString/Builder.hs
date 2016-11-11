@@ -7,7 +7,10 @@ import qualified JSONBytesBuilder.Private.ByteString.BoundedPrim as A
 import qualified Data.ByteString.Builder.Prim as A
 import qualified Data.ByteString.Builder.Scientific as D
 import qualified Data.ByteString as E
+import qualified Data.ByteString.Lazy as F
 import qualified Data.Text.Encoding as B
+import qualified Data.Text.Lazy as G
+import qualified Data.Text.Lazy.Encoding as H
 import qualified Data.Scientific as C
 
 
@@ -21,15 +24,25 @@ boolean :: Bool -> Builder
 boolean =
   A.primBounded A.boolean
 
-{-# INLINABLE string #-}
-string :: Text -> Builder
-string x =
+{-# INLINABLE stringFromText #-}
+stringFromText :: Text -> Builder
+stringFromText x =
   char8 '"' <> B.encodeUtf8BuilderEscaped A.stringEncodedByte x <> char8 '"'
 
-{-# INLINABLE asciiString #-}
-asciiString :: ByteString -> Builder
-asciiString x =
+{-# INLINABLE stringFromLazyText #-}
+stringFromLazyText :: G.Text -> Builder
+stringFromLazyText x =
+  char8 '"' <> H.encodeUtf8BuilderEscaped A.stringEncodedByte x <> char8 '"'
+
+{-# INLINABLE stringFromBytes #-}
+stringFromBytes :: ByteString -> Builder
+stringFromBytes x =
   char8 '"' <> A.primMapByteStringBounded (inline A.stringEncodedByte) x <> char8 '"'
+
+{-# INLINABLE stringFromLazyBytes #-}
+stringFromLazyBytes :: F.ByteString -> Builder
+stringFromLazyBytes x =
+  char8 '"' <> A.primMapLazyByteStringBounded (inline A.stringEncodedByte) x <> char8 '"'
 
 {-# INLINABLE scientific #-}
 scientific :: Scientific -> Builder
@@ -49,7 +62,7 @@ inCurlies x =
 {-# INLINABLE row #-}
 row :: Text -> Builder -> Builder
 row key value =
-  string key <> char8 ':' <> value
+  stringFromText key <> char8 ':' <> value
 
 {-# INLINABLE inSquarelies #-}
 inSquarelies :: Builder -> Builder

@@ -3,6 +3,8 @@ where
 
 import JSONBytesBuilder.Private.Prelude hiding (null)
 import qualified Data.ByteString.Builder as A
+import qualified Data.Text.Lazy as C
+import qualified Data.ByteString.Lazy as D
 import qualified JSONBytesBuilder.Private.ByteString.Builder as E
 
 
@@ -69,43 +71,55 @@ boolean =
 
 -- |
 -- JSON Number literal from 'Int'.
-{-# INLINE number_int #-}
-number_int :: Int -> Literal
-number_int =
+{-# INLINE numberFromInt #-}
+numberFromInt :: Int -> Literal
+numberFromInt =
   Literal . inline A.intDec
 
 -- |
 -- JSON Number literal from 'Integer'.
-{-# INLINE number_integer #-}
-number_integer :: Integer -> Literal
-number_integer =
+{-# INLINE numberFromInteger #-}
+numberFromInteger :: Integer -> Literal
+numberFromInteger =
   Literal . inline A.integerDec
 
 -- |
 -- JSON Number literal from 'Double'.
-{-# INLINE number_double #-}
-number_double :: Double -> Literal
-number_double =
+{-# INLINE numberFromDouble #-}
+numberFromDouble :: Double -> Literal
+numberFromDouble =
   Literal . inline A.doubleDec
 
 -- |
 -- JSON Number literal from 'Scientific'.
-{-# INLINE number_scientific #-}
-number_scientific :: Scientific -> Literal
-number_scientific =
+{-# INLINE numberFromScientific #-}
+numberFromScientific :: Scientific -> Literal
+numberFromScientific =
   Literal . inline E.scientific
 
 -- |
--- JSON String literal from 'Text'.
-{-# INLINE string_text #-}
-string_text :: Text -> Literal
-string_text =
-  Literal . inline E.string
+-- JSON String literal from 'Text' encoded using UTF8.
+{-# INLINE stringFromText #-}
+stringFromText :: Text -> Literal
+stringFromText =
+  Literal . inline E.stringFromText
 
-{-# INLINE string_bytes #-}
-string_bytes :: ByteString -> Literal
-string_bytes =
-  Literal . inline E.asciiString
+-- |
+-- JSON String literal from lazy Text encoded using UTF8.
+{-# INLINE stringFromLazyText #-}
+stringFromLazyText :: C.Text -> Literal
+stringFromLazyText =
+  Literal . inline E.stringFromLazyText
+
+{-# INLINE stringFromBytes #-}
+stringFromBytes :: ByteString -> Literal
+stringFromBytes =
+  Literal . inline E.stringFromBytes
+
+{-# INLINE stringFromLazyBytes #-}
+stringFromLazyBytes :: D.ByteString -> Literal
+stringFromLazyBytes =
+  Literal . inline E.stringFromLazyBytes
 
 -- |
 -- JSON Object literal from the 'Rows' builder.
