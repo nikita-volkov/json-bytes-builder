@@ -29,7 +29,7 @@ string x =
 {-# INLINABLE asciiString #-}
 asciiString :: ByteString -> Builder
 asciiString x =
-  char8 '"' <> A.primMapByteStringBounded A.stringEncodedByte x <> char8 '"'
+  char8 '"' <> A.primMapByteStringBounded (inline A.stringEncodedByte) x <> char8 '"'
 
 {-# INLINABLE scientific #-}
 scientific :: Scientific -> Builder
