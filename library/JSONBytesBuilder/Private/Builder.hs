@@ -34,6 +34,8 @@ instance Monoid Rows where
       Rows Nothing ->
         id
 
+instance Semigroup Rows
+
 -- |
 -- Builder of JSON Array elements.
 newtype Elements =
@@ -54,6 +56,8 @@ instance Monoid Elements where
             Elements (Just left)
       Elements Nothing ->
         id
+
+instance Semigroup Elements
 
 -- |
 -- JSON Null literal.
