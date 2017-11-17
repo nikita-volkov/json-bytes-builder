@@ -1,7 +1,7 @@
 name:
   json-bytes-builder
 version:
-  0.5
+  0.5.1
 synopsis:
   Direct-to-bytes JSON Builder
 description:
