@@ -15,7 +15,9 @@ module JSONBytesBuilder.Builder
   stringFromBytes,
   stringFromLazyBytes,
   object,
+  objectFromRows,
   array,
+  arrayFromLiterals,
   -- ** Rows builders
   Rows,
   row,

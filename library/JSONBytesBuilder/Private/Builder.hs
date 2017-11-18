@@ -137,11 +137,26 @@ object (Rows x) =
   Literal (maybe E.emptyObject (inline E.inCurlies) x)
 
 -- |
+-- JSON Object literal from a list of rows.
+-- A convienience shortcut to @object . mconcat@ for typical cases.
+{-# INLINE objectFromRows #-}
+objectFromRows :: [Rows] -> Literal
+objectFromRows =
+  object . mconcat
+
+-- |
 -- JSON Array literal from the 'Elements' builder.
 {-# INLINE array #-}
 array :: Elements -> Literal
 array (Elements x) =
   Literal (maybe E.emptyArray (inline E.inSquarelies) x)
+
+-- |
+-- JSON Array literal from a list of element literals.
+-- A convienience shortcut to @array . foldMap element@ for typical cases.
+arrayFromLiterals :: [Literal] -> Literal
+arrayFromLiterals =
+  array . foldMap element
 
 -- |
 -- Rows builder from a key-value pair,
