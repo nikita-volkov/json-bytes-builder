@@ -115,11 +115,15 @@ stringFromLazyText :: C.Text -> Literal
 stringFromLazyText =
   Literal . inline E.stringFromLazyText
 
+-- |
+-- JSON String literal from 'ByteString' with only escaping applied to it.
 {-# INLINE stringFromBytes #-}
 stringFromBytes :: ByteString -> Literal
 stringFromBytes =
   Literal . inline E.stringFromBytes
 
+-- |
+-- JSON String literal from lazy ByteString with only escaping applied to it.
 {-# INLINE stringFromLazyBytes #-}
 stringFromLazyBytes :: D.ByteString -> Literal
 stringFromLazyBytes =

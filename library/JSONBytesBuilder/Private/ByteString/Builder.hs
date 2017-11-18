@@ -37,12 +37,12 @@ stringFromLazyText x =
 {-# INLINABLE stringFromBytes #-}
 stringFromBytes :: ByteString -> Builder
 stringFromBytes x =
-  char8 '"' <> A.primMapByteStringBounded (inline A.stringEncodedByte) x <> char8 '"'
+  char8 '"' <> A.primMapByteStringBounded A.stringEncodedByte x <> char8 '"'
 
 {-# INLINABLE stringFromLazyBytes #-}
 stringFromLazyBytes :: F.ByteString -> Builder
 stringFromLazyBytes x =
-  char8 '"' <> A.primMapLazyByteStringBounded (inline A.stringEncodedByte) x <> char8 '"'
+  char8 '"' <> A.primMapLazyByteStringBounded A.stringEncodedByte x <> char8 '"'
 
 {-# INLINABLE scientific #-}
 scientific :: Scientific -> Builder
