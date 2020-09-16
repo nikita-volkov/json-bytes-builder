@@ -18,12 +18,8 @@ newtype Literal =
 newtype Rows =
   Rows (Maybe A.Builder)
 
-instance Monoid Rows where
-  {-# INLINE mempty #-}
-  mempty =
-    Rows Nothing
-  {-# INLINE mappend #-}
-  mappend =
+instance Semigroup Rows where
+  (<>) =
     \case
       Rows (Just left) ->
         \case
@@ -34,19 +30,21 @@ instance Monoid Rows where
       Rows Nothing ->
         id
 
-instance Semigroup Rows
+instance Monoid Rows where
+  {-# INLINE mempty #-}
+  mempty =
+    Rows Nothing
+  {-# INLINE mappend #-}
+  mappend =
+    (<>)
 
 -- |
 -- Builder of JSON Array elements.
 newtype Elements =
   Elements (Maybe A.Builder)
 
-instance Monoid Elements where
-  {-# INLINE mempty #-}
-  mempty =
-    Elements Nothing
-  {-# INLINE mappend #-}
-  mappend =
+instance Semigroup Elements where
+  (<>) =
     \case
       Elements (Just left) ->
         \case
@@ -57,7 +55,14 @@ instance Monoid Elements where
       Elements Nothing ->
         id
 
-instance Semigroup Elements
+instance Monoid Elements where
+  {-# INLINE mempty #-}
+  mempty =
+    Elements Nothing
+  {-# INLINE mappend #-}
+  mappend =
+    (<>)
+
 
 -- |
 -- JSON Null literal.

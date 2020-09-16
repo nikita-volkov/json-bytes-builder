@@ -55,12 +55,10 @@ library
     JSONBytesBuilder.ByteString.ByteString
     JSONBytesBuilder.ByteString.LazyByteString
   build-depends:
-    scientific == 0.3.*,
-    text == 1.*,
+    base >= 4.11 && < 5,
     bytestring == 0.10.*,
-    semigroups >= 0.16 && < 0.20,
-    base-prelude < 2,
-    base >= 4.7 && < 5
+    scientific == 0.3.*,
+    text == 1.*
 
 test-suite demo
   type: 
@@ -106,7 +104,7 @@ benchmark benchmark
   build-depends:
     json-bytes-builder,
     -- benchmarking:
-    criterion == 1.1.*,
+    criterion == 1.5.*,
     -- 
-    aeson >= 0.10 && < 2,
+    aeson == 1.*,
     rebase == 1.*

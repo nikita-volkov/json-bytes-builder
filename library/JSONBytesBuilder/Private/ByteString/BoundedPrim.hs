@@ -1,7 +1,7 @@
 module JSONBytesBuilder.Private.ByteString.BoundedPrim
 where
 
-import JSONBytesBuilder.Private.Prelude
+import JSONBytesBuilder.Private.Prelude hiding ((>$<))
 import Data.ByteString.Builder.Prim
 
 
